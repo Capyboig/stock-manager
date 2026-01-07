@@ -11,6 +11,38 @@ public class ProductoDAO {
 
 
 
+    public void buscarProductoPorNombre(String busqueda) {
+        String sql = "SELECT * FROM productos WHERE nombre LIKE ?";
+
+        try (Connection con = ConexionBD.conectar();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+
+            ps.setString(1, "%" + busqueda + "%");
+
+            try (ResultSet rs = ps.executeQuery()) {
+                boolean encontrado = false;
+
+                System.out.println("--- RESULTADOS DE BÚSQUEDA ---");
+
+                while (rs.next()) {
+                    System.out.println("ID: " + rs.getInt("id") +
+                            " | Nombre: " + rs.getString("nombre") +
+                            " | Cantidad: " + rs.getInt("cantidad") +
+                            " | Precio: " + rs.getDouble("precio"));
+                    encontrado = true;
+                }
+
+                if (!encontrado) {
+                    System.out.println("[ERROR] No se encontraron productos que contengan: '" + busqueda + "'");
+                }
+            }
+
+        } catch (SQLException e) {
+            System.out.println("[ERROR] al buscar productos");
+            e.printStackTrace();
+        }
+    }
     public void eliminarProducto(int id) {
         String sql = "DELETE FROM productos WHERE id = ?";
 

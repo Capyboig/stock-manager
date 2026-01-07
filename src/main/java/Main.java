@@ -20,7 +20,8 @@ public class Main {
                     System.out.println("|                      2- Listar productos                            |");
                     System.out.println("|                      3- Actualizar stock                            |");
                     System.out.println("|                      4- Eliminar Producto                           |");
-                    System.out.println("|                      5- Salir                                       |");
+                    System.out.println("|                      5- Buscar Producto                             |");
+                    System.out.println("|                      6- Salir                                       |");
                     System.out.println("|---------------------------------------------------------------------|");
 
                     System.out.println("Escriba la opcion del menu a la que quiere acceder:");
@@ -94,6 +95,15 @@ public class Main {
                             break;
 
                         case 5:
+                            System.out.println(" ----- Busqueda de producto -----");
+
+                            System.out.printf("Introduzca el nombre del producto a encontrar");
+                            String busqueda = sc.nextLine();
+
+                            dao.buscarProductoPorNombre(busqueda);
+
+                            break;
+                        case 6:
                             salir = true;
                             System.out.println("Cerrando sistema...");
                             break;
